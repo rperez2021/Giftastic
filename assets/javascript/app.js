@@ -26,7 +26,11 @@ function runQuery(queryURL) {
         var p = $("<p>").text("Rating: " + rating);
 
         var personImage = $("<img>");
-        personImage.attr("src", results[i].images.fixed_height.url);
+        personImage.attr("src", results[i].images.fixed_height_still.url);
+        personImage.attr("data-still", results[i].images.fixed_height_still.url);
+        personImage.attr("data-animate", results[i].images.fixed_height.url)
+        personImage.attr("data-state", "still")
+        personImage.attr("class", "gif")
 
         gifDiv.prepend(p);
         gifDiv.prepend(personImage);
@@ -36,16 +40,14 @@ function runQuery(queryURL) {
     })
 }
 
-$(".actionhero").on("click", function () {
+$('#buttons').on('click', '.actionhero',function() {
   event.preventDefault();
   var person = $(this).attr("data-person");
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
     person + "&api_key=dc6zaTOxFJmzC&limit=10";
-  // }
   runQuery(queryURL)
 });
 
-// function searchQuery(){
 $(".subbtn").on("click", function () {
   event.preventDefault();
   var searchTerm = $("#search-term").val().trim();
@@ -63,5 +65,16 @@ $(".subbtn").on("click", function () {
     button.addClass("btn-danger")
     button.addClass("mx-1")
     $("#buttons").append(button)
+  }
+});
+
+$("#gifs-appear-here").on("click", '.gif', function() {
+  var state = $(this).attr("data-state");
+  if (state === "still") {
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+  } else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
   }
 });
