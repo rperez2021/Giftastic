@@ -6,7 +6,7 @@ for (i = 0; i < topics.length; i++) {
   button.addClass("actionhero")
   button.addClass("btn")
   button.addClass("btn-danger")
-  button.addClass("mx-1")
+  button.addClass("m-1")
   $("#buttons").append(button)
 }
 
@@ -63,7 +63,7 @@ $(".subbtn").on("click", function () {
     button.addClass("actionhero")
     button.addClass("btn")
     button.addClass("btn-danger")
-    button.addClass("mx-1")
+    button.addClass("m-1")
     $("#buttons").append(button)
   }
 });
